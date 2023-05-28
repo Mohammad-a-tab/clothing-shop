@@ -1,16 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ObjectId, UpdateDateColumn } from "typeorm";
-@Entity('users')
-export class User {
-    @PrimaryGeneratedColumn('uuid')
-    id: ObjectId;
+import { Column, CreateDateColumn, Entity } from "typeorm";
+@Entity('products')
+export class Product {
     @Column({ nullable: true })
-    car_name: string;
+    title: string;
     @Column({ nullable: false, unique: true })
-    mechanical: string;
+    description: string;
     @Column({ nullable: false })
-    Injector: string
+    size: string
     @Column({ nullable: false })
-    Wiring: string
+    price: string
     @Column({ default: "" })
-    Engine: string;
+    images: [string];
 }
