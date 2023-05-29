@@ -1,4 +1,5 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ObjectId } from "typeorm";
+
 @Entity('products')
 export class Product {
     @Column({ nullable: true })
@@ -9,6 +10,8 @@ export class Product {
     size: string;
     @Column({ nullable: false })
     price: string;
+    @Column({ nullable: false })
+    category: ObjectId;
     @Column({ nullable: false })
     color: string;
     @Column({ type: 'varchar', array: true })
