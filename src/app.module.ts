@@ -4,9 +4,19 @@ import { AppService } from './app.service';
 import { ProductModule } from './products/product.module';
 import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [ProductModule, CategoriesModule, UsersModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      host: 'localhost',
+      port: 27017,
+      database: 'your-database-name',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    ProductModule, CategoriesModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
