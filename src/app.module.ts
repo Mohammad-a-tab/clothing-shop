@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsController } from './products/products.controller';
-import { ProductsModule } from './products/products.module';
-import { CategoriesService } from './categories/categories.service';
+import { ProductModule } from './products/product.module';
 import { CategoriesModule } from './categories/categories.module';
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [ProductsModule, CategoriesModule, UsersModule],
+  imports: [ProductModule, CategoriesModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
