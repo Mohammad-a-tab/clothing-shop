@@ -10,7 +10,7 @@ export class CategoryService {
         @InjectRepository(CategoryRepository) private readonly categoryRepository: CategoryRepository
     ) { }
 
-    createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
+    async createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
         const category = this.categoryRepository.createCategory(createCategoryDTO);
         return category;
     }
