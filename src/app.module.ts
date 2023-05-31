@@ -12,11 +12,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'mongodb',
       host: 'localhost',
       port: 27017,
-      database: 'your-database-name',
+      database: 'Clothing-Shop',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    ProductModule, CategoriesModule, UsersModule],
+    ProductModule,
+    CategoriesModule,
+    UsersModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

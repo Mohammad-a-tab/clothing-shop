@@ -1,16 +1,16 @@
-import { Column, Entity, ObjectId } from "typeorm";
+import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity('products')
 export class Product {
-    @Column({ nullable: true })
-    title: string;
+    @ObjectIdColumn()
+    id: ObjectId;
     @Column({ nullable: false })
     description: string;
     @Column({ nullable: false })
     size: string;
     @Column({ nullable: false })
     price: string;
-    @Column({ nullable: false })
+    @ObjectIdColumn()
     category: ObjectId;
     @Column({ nullable: false })
     color: string;
