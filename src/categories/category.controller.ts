@@ -1,5 +1,5 @@
 import { Controller, Body, Post, Patch, Get, Delete } from '@nestjs/common';
-import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
 import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
@@ -16,6 +16,18 @@ export class CategoryController {
     @Get()
     getCategory() {}
     @Post('add')
+    @ApiConsumes('application/x-www-form-urlencoded')
+    @ApiBody({
+        description: 'Create Category',
+        schema: {
+            type: 'object',
+            properties: {
+                title : { type: 'string' },
+                parent : { type: 'string', example: "62822e4ff68cdded54aa928d" },
+            },
+            required: ['title'],
+        },
+    })
     createCategory(@Body() createCategoryDTO : CreateCategoryDTO): Promise<Category> {
         return this.categoryService.createCategory(createCategoryDTO);
     }
