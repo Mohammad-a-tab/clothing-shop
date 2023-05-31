@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './products/product.module';
-import { CategoriesModule } from './categories/categories.module';
+import { CategoryModule } from './categories/category.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -17,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     ProductModule,
-    CategoriesModule,
+    CategoryModule,
     UsersModule
   ],
   controllers: [AppController],
