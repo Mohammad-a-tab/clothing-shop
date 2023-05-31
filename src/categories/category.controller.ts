@@ -17,7 +17,7 @@ export class CategoryController {
     getCategory() {}
     @Post('add')
     createCategory(@Body() createCategoryDTO : CreateCategoryDTO): Promise<Category> {
-        return this.categoryService
+        return this.categoryService.createCategory(createCategoryDTO);
     }
     @Delete()
     removeCategory() {}
