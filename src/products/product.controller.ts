@@ -1,8 +1,12 @@
 import { Controller, Post, Patch, Get, Delete } from '@nestjs/common';
-import { ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 
+@ApiTags('products')
+@ApiBearerAuth()
 @Controller('products')
+// @UseGuards(AuthGuard())
+@ApiSecurity('bearerAuth')
 export class ProductController {
     constructor(
         private readonly productService: ProductService
