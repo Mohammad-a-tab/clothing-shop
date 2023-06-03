@@ -14,7 +14,9 @@ export class CategoryController {
     ) { }
     
     @Get()
-    getCategory() {}
+    getAllCategories(): Promise<Category[]> {
+        return this.categoryService.getAllCategories();
+    }
     @Post('add')
     @ApiConsumes('application/x-www-form-urlencoded')
     @ApiBody({

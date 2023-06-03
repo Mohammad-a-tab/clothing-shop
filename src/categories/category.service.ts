@@ -14,6 +14,10 @@ export class CategoryService {
         const category = this.categoryRepository.createCategory(createCategoryDTO);
         return category;
     }
+    async getAllCategories(): Promise<Category[]> {
+        const categories = await this.categoryRepository.find();
+        return categories;
+    }
 
 }
 
