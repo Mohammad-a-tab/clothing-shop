@@ -1,4 +1,6 @@
-import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
+import { Column, Entity, ObjectIdColumn } from "typeorm";
+import { ObjectId } from 'mongoose';
+
 
 @Entity('categories')
 export class Category {
@@ -6,6 +8,8 @@ export class Category {
     id: ObjectId;
     @Column({ nullable: false })
     title: string;
-    @ObjectIdColumn()
+    @Column({ nullable: true })
     parent: ObjectId;
+
 }
+

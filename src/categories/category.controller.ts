@@ -25,7 +25,7 @@ export class CategoryController {
             type: 'object',
             properties: {
                 title : { type: 'string' },
-                parent : { type: 'string', example: "62822e4ff68cdded54aa928d" },
+                parent : { type: 'string' },
             },
             required: ['title'],
         },
