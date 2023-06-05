@@ -1,5 +1,5 @@
 import { Controller, Body, Post, Patch, Get, Delete, Param } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags, ApiParam } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
 import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
@@ -19,8 +19,14 @@ export class CategoryController {
         return this.categoryService.getAllCategories();
     }
     @Get(':id')
+    @ApiParam({
+        name: 'id',
+        type: 'string',
+        description: 'Id of the category',
+    })
     getCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
+        // console.log("", id);
         return this.categoryService.getCategory(id);
     }
     @Post('add')
