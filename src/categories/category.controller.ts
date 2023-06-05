@@ -18,7 +18,7 @@ export class CategoryController {
     getAllCategories(): Promise<Category[]> {
         return this.categoryService.getAllCategories();
     }
-    @Get()
+    @Get(':id')
     getCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.getCategory(id);

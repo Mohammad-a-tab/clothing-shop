@@ -1,7 +1,5 @@
 import { Column, Entity, ObjectIdColumn } from "typeorm";
-// import { ObjectId } from 'mongoose';
 import { ObjectId } from 'mongodb';
-
 
 @Entity('categories')
 export class Category {

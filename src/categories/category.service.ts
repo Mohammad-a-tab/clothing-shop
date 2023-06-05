@@ -3,11 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryRepository } from './category.repository';
 import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
-import { FindOneOptions } from 'typeorm';
 import { ObjectId } from 'mongodb';
-// import { ObjectId } from 'mongoose';
-
-
 
 @Injectable()
 export class CategoryService {
@@ -24,17 +20,7 @@ export class CategoryService {
         return categories;
     }
     async getCategory(id: ObjectId): Promise<Category> {
-        // const options: FindOneOptions<Category> = {
-        //     where: {
-        //       id: new ObjectId(id),
-        //     },
-        // };
-        // const categoryId: ObjectId = new ObjectId(); // Your desired category ID
-
-        const options: FindOneOptions<Category> = {
-            where: { id: id },
-        };
-        const category = await this.categoryRepository.findOne(options);
+        const category = await this.categoryRepository.findOne({ where: { id } });
         return category
       
     }
