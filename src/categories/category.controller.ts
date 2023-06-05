@@ -1,7 +1,7 @@
 import { Controller, Body, Post, Patch, Get, Delete } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
-import { CreateCategoryDTO } from './dto/create-category.dto';
+import { CreateCategoryDTO } from './dtos/create-category.dto';
 import { Category } from './category.entity';
 @ApiTags('categories')
 @ApiBearerAuth()
