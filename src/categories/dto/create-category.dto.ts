@@ -1,5 +1,6 @@
 import { IsString, IsNotEmpty, IsMongoId } from "class-validator";
-import { ObjectId } from "mongoose";
+// import { ObjectId } from "mongoose";
+import { ObjectId } from 'mongodb';
 
 export class CreateCategoryDTO {
     @IsNotEmpty()

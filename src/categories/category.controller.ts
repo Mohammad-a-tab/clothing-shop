@@ -1,9 +1,9 @@
 import { Controller, Body, Post, Patch, Get, Delete, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
-import { CreateCategoryDTO } from './dtos/create-category.dto';
+import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
-import { CategoryIdDTO } from './dtos/id-category.dto';
+import { CategoryIdDTO } from './dto/id-category.dto';
 @ApiTags('categories')
 @ApiBearerAuth()
 // @UseGuards(AuthGuard())
@@ -17,6 +17,11 @@ export class CategoryController {
     @Get()
     getAllCategories(): Promise<Category[]> {
         return this.categoryService.getAllCategories();
+    }
+    @Get()
+    getCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
+        const { id } = categoryIdDto;
+        return this.categoryService.getCategory(id);
     }
     @Post('add')
     @ApiConsumes('application/x-www-form-urlencoded')
@@ -35,7 +40,7 @@ export class CategoryController {
         return this.categoryService.createCategory(createCategoryDTO);
     }
     @Delete('remove/:id')
-    removeCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<void> {
+    removeCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.deleteCategoryById(id);
     }

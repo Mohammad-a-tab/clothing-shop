@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryRepository } from './category.repository';
-import { CreateCategoryDTO } from './dtos/create-category.dto';
+import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
 import { FindOneOptions } from 'typeorm';
+import { ObjectId } from 'mongodb';
+// import { ObjectId } from 'mongoose';
+
 
 
 @Injectable()
@@ -20,16 +23,25 @@ export class CategoryService {
         const categories = await this.categoryRepository.find();        
         return categories;
     }
-    async getCategory(id: string): Promise<Category> {
+    async getCategory(id: ObjectId): Promise<Category> {
+        // const options: FindOneOptions<Category> = {
+        //     where: {
+        //       id: new ObjectId(id),
+        //     },
+        // };
+        // const categoryId: ObjectId = new ObjectId(); // Your desired category ID
+
         const options: FindOneOptions<Category> = {
-            where: {
-              id: new ObjectId(id),
-            },
+            where: { id: id },
         };
+        const category = await this.categoryRepository.findOne(options);
+        return category
       
     }
-    async deleteCategoryById(id: string): Promise<void> {
-        const category = await this.
+    async deleteCategoryById(id: ObjectId): Promise<Category> {
+        const category = await this.getCategory(id);
+        await this.categoryRepository.remove(category);
+        return category;
     }
 
 }
