@@ -9,7 +9,8 @@ import { UpdateCategoryDTO } from './dto/update-category.dto';
 @Injectable()
 export class CategoryService {
     constructor(
-        @InjectRepository(CategoryRepository) private readonly categoryRepository: CategoryRepository
+        @InjectRepository(CategoryRepository) 
+        private readonly categoryRepository: CategoryRepository
     ) { }
     
     async getAllCategories(): Promise<Category[]> {
@@ -21,7 +22,7 @@ export class CategoryService {
         const category = await this.categoryRepository.findOneBy({ _id: categoryId });
         return category
     }
-    async createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
+    createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
         const category = this.categoryRepository.createCategory(createCategoryDTO);
         return category;
     }

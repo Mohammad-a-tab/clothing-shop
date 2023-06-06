@@ -1,4 +1,5 @@
-import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
+import { Column, Entity, ObjectIdColumn } from "typeorm";
+import { ObjectId } from 'mongodb';
 
 @Entity('products')
 export class Product {
@@ -10,7 +11,7 @@ export class Product {
     size: string;
     @Column({ nullable: false })
     price: string;
-    @ObjectIdColumn()
+    @Column({ nullable: false })
     category: ObjectId;
     @Column({ nullable: false })
     color: string;
