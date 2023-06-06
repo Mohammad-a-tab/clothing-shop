@@ -4,6 +4,7 @@ import { CategoryService } from './category.service';
 import { CreateCategoryDTO } from './dto/create-category.dto';
 import { Category } from './category.entity';
 import { CategoryIdDTO } from './dto/id-category.dto';
+import { UpdateCategoryDTO } from './dto/update-category.dto';
 @ApiTags('categories')
 @ApiBearerAuth()
 // @UseGuards(AuthGuard())
@@ -43,6 +44,22 @@ export class CategoryController {
     })
     createCategory(@Body() createCategoryDTO : CreateCategoryDTO): Promise<Category> {
         return this.categoryService.createCategory(createCategoryDTO);
+    }
+    @Patch('update')
+    @ApiConsumes('application/x-www-form-urlencoded')
+    @ApiBody({
+        description: 'Update Category',
+        schema: {
+            type: 'object',
+            properties: {
+                id : { type: 'string' },
+                title : { type: 'string' },
+                parent : { type: 'string' },
+            },
+        },
+    })
+    updateCategory(@Body() updateCategoryDTO : UpdateCategoryDTO): Promise<Category> {
+        return this.categoryService.updateCategory(updateCategoryDTO);
     }
     @Delete('remove/:id')
     @ApiParam({
