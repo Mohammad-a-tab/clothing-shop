@@ -26,7 +26,6 @@ export class CategoryController {
     })
     getCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
-        // console.log("", id);
         return this.categoryService.getCategory(id);
     }
     @Post('add')
