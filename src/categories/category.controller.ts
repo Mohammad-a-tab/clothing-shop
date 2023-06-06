@@ -45,6 +45,11 @@ export class CategoryController {
         return this.categoryService.createCategory(createCategoryDTO);
     }
     @Delete('remove/:id')
+    @ApiParam({
+        name: 'id',
+        type: 'string',
+        description: 'Id of the category',
+    })
     removeCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.deleteCategoryById(id);
