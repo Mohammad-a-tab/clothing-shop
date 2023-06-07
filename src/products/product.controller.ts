@@ -1,8 +1,9 @@
-import { Controller, Post, Patch, Get, Delete, Body } from '@nestjs/common';
-import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
+import { Controller, Post, Patch, Get, Delete, Body, Param } from '@nestjs/common';
+import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity, ApiParam } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { Product } from './product.entity';
+import { ProductIdDTO } from './dto/id-product.dto';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -14,6 +15,20 @@ export class ProductController {
         private readonly productService: ProductService
     ) { }
 
+    @Get()
+    getAllProducts(): Promise<Product[]> {
+        return this.productService.getAllProducts();
+    }
+    @Get(':id')
+    @ApiParam({
+        name: 'id',
+        type: 'string',
+        description: 'Id of the Product',
+    })
+    getProduct(@Param() productIdDTo: ProductIdDTO): Promise<Product> {
+        const { id } = productIdDTo;
+        return this.productService.getProduct(id);
+    }
     @Post('add')
     @ApiConsumes("application/x-www-form-urlencoded")
     @ApiBody({
@@ -35,12 +50,6 @@ export class ProductController {
     createProduct(@Body() createProductDTO: CreateProductDTO): Promise<Product> {
         return this.productService.createProduct(createProductDTO);
     }
-    @Get()
-    getAllProducts(): Promise<Product[]> {
-        return this.productService.getAllProducts();
-    }
-    @Get()
-    getProduct() {}
     @Patch()
     updateProduct() {}
     @Delete()
