@@ -1,6 +1,8 @@
-import { Controller, Post, Patch, Get, Delete } from '@nestjs/common';
+import { Controller, Post, Patch, Get, Delete, Body } from '@nestjs/common';
 import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 import { ProductService } from './product.service';
+import { CreateProductDTO } from './dto/create-product.dto';
+import { Product } from './product.entity';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -30,7 +32,9 @@ export class ProductController {
             required: ['title', 'description', 'size', 'price', 'category'],
         },
     })
-    createProduct() {}
+    createProduct(@Body() createProductDTO: CreateProductDTO): Promise<Product> {
+        return this.productService.createProduct(createProductDTO);
+    }
     @Get()
     getProducts() {}
     @Get()

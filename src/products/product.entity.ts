@@ -15,8 +15,8 @@ export class Product {
     price: string;
     @Column({ nullable: false })
     category: ObjectId;
-    @Column({ type: 'varchar', array: true })
-    colors: string;
-    @Column({ type: 'varchar', array: true })
-    images: string;
+    @Column('simple-array')
+    colors: string[];
+    @Column('simple-array')
+    images: string[];
 }

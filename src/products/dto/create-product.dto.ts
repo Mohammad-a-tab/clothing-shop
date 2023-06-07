@@ -1,4 +1,5 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsMongoId, IsNotEmpty, IsString } from "class-validator";
+import { ObjectId } from "mongodb";
 
 export class CreateProductDTO {
     @IsNotEmpty()
@@ -20,6 +21,9 @@ export class CreateProductDTO {
     @IsNotEmpty()
     @IsArray()
     colors: Array<string>;
+
+    @IsMongoId()
+    category: ObjectId
 
     @IsNotEmpty()
     @IsArray()
