@@ -15,7 +15,7 @@ export class ProductController {
     ) { }
 
     @Post('add')
-    @ApiConsumes('multipart/form-data')
+    @ApiConsumes("application/x-www-form-urlencoded")
     @ApiBody({
         description: 'Create Product',
         schema: {
@@ -26,7 +26,7 @@ export class ProductController {
                 size : { type: 'string' },
                 price : { type: 'string', example: '25000' },
                 category : { type: 'string', example: "62822e4ff68cdded54aa928d" },
-                color : { type: 'array', items: { type: "string", enum: ['black', 'white', 'red', 'blue'] } },
+                colors : { type: 'array', items: { type: "string", enum: ['black', 'white', 'red', 'blue'] } },
                 images : { type: 'array', items: { type: "string", format: "binary" } },
             },
             required: ['title', 'description', 'size', 'price', 'category'],
