@@ -36,7 +36,9 @@ export class ProductController {
         return this.productService.createProduct(createProductDTO);
     }
     @Get()
-    getProducts() {}
+    getAllProducts(): Promise<Product[]> {
+        return this.productService.getAllProducts();
+    }
     @Get()
     getProduct() {}
     @Patch()
