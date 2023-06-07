@@ -52,6 +52,14 @@ export class ProductController {
     }
     @Patch()
     updateProduct() {}
-    @Delete()
-    deleteProduct() {}
+    @Delete(':id')
+    @ApiParam({
+        name: 'id',
+        type: 'string',
+        description: 'Id of the Product',
+    })
+    deleteProduct(@Param() productIdDTo: ProductIdDTO): Promise<Product> {
+        const { id } = productIdDTo;
+        return this.productService.deleteProductById(id);
+    }
 }

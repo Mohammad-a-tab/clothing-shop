@@ -23,4 +23,9 @@ export class ProductService {
         const product = this.productRepository.createProduct(createProductDTO);
         return product;
     }
+    async deleteProductById(id: string): Promise<Product> {
+        const product = await this.getProduct(id);
+        await this.productRepository.remove(product);
+        return product;
+    }
 }
