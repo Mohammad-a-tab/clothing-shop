@@ -5,6 +5,7 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Product } from './product.entity';
 import { ProductIdDTO } from './dto/id-product.dto';
+import { multerConfig } from 'src/utils/multer.config';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -31,8 +32,7 @@ export class ProductController {
         return this.productService.getProduct(id);
     }
     @Post('add')
-    @UseInterceptors(FileInterceptor('files'))
-
+    @UseInterceptors(FileInterceptor('file', multerConfig))
     @ApiConsumes("application/x-www-form-urlencoded")
     @ApiBody({
         description: 'Create Product',
@@ -50,7 +50,8 @@ export class ProductController {
             required: ['title', 'description', 'size', 'price', 'category'],
         },
     })
-    createProduct(@UploadedFile() file: Express.Multer.File, @Body() createProductDTO: CreateProductDTO): Promise<Product> {
+    createProduct(@UploadedFile() file, @Body() createProductDTO: CreateProductDTO): Promise<Product> {
+        console.log(file);
         return this.productService.createProduct(createProductDTO);
     }
     @Patch()
