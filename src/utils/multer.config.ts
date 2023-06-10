@@ -13,9 +13,9 @@ export const multerConfig = {
   }),
   limits: {
     fileSize: 1024 * 1024 * 5, // File size limit (5MB)
+    files: 10, // Maximum number of files allowed
   },
   fileFilter: (req, file, callback) => {
-    // Check file types here (optional)
     if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
       callback(null, true);
     } else {

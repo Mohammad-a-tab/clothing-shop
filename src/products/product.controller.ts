@@ -1,4 +1,4 @@
-import { Controller, Post, Patch, Get, Delete, Body, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Post, Patch, Get, Delete, Body, Param, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity, ApiParam } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dto/create-product.dto';
@@ -32,8 +32,7 @@ export class ProductController {
         return this.productService.getProduct(id);
     }
     @Post('add')
-    @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    @ApiConsumes("application/x-www-form-urlencoded")
+    @ApiConsumes("multipart/form-data")
     @ApiBody({
         description: 'Create Product',
         schema: {
@@ -50,7 +49,8 @@ export class ProductController {
             required: ['title', 'description', 'size', 'price', 'category'],
         },
     })
-    async createProduct(@UploadedFile() files, @Body() createProductDTO: CreateProductDTO): Promise<Product> {
+    @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
+    async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files): Promise<Product> {
         console.log(files);
         return this.productService.createProduct(createProductDTO);
     }

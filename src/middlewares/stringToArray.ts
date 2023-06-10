@@ -4,6 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class StringToArray implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
+        console.log();
+        
         if(req.body.colors){
             if(typeof req.body.colors == "string"){
                 if(req.body.colors.indexOf("#") >=0){
