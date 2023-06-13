@@ -1,4 +1,4 @@
-import { Controller, Post, Patch, Get, Delete, Body, Param, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Post, Patch, Get, Delete, Body, Param, UseInterceptors, UploadedFiles, Req } from '@nestjs/common';
 import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity, ApiParam } from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dto/create-product.dto';
@@ -50,7 +50,8 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files): Promise<Product> {
+    async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
+        req.body.colors = req.body.colors.split(',').map(item => item.trim());
         console.log(files);
         return this.productService.createProduct(createProductDTO);
     }

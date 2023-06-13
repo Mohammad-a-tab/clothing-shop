@@ -19,7 +19,7 @@ export class ProductService {
         const product = await this.productRepository.findOneBy({ _id: productId });
         return product;
     }
-    createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
+    async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
         const product = this.productRepository.createProduct(createProductDTO);
         return product;
     }
