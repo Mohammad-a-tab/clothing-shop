@@ -6,7 +6,7 @@ export const multerConfig = {
         destination: './uploads',
         filename: (req, file, callback) => {
           const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-          const originalNameWithoutSpaces = file.originalname.replace(/\\/g, "/");
+          const originalNameWithoutSpaces = file.originalname.replace(/\s/g, '');
           const filename = `${uniqueSuffix}-${originalNameWithoutSpaces}`;
           callback(null, filename);
         },

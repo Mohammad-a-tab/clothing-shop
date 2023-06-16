@@ -45,7 +45,10 @@ export class ProductController {
                 price : { type: 'string', example: '25000' },
                 category : { type: 'string', example: "62822e4ff68cdded54aa928d" },
                 colors : { type: 'array', items: { type: "string", enum: ['black', 'white', 'red', 'blue'] } },
-                images : { type: 'array', items: { type: "string", format: "binary" } },
+                images : { 
+                    type: 'array', items: { type: "string", format: "binary" }, 
+                    description: 'لطفا از ارسال تصاویر با نام فارسی خود داری بفرمایید' 
+                },
             },
             required: ['title', 'description', 'size', 'price', 'category'],
         },
