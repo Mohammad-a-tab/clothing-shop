@@ -6,6 +6,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { Product } from './product.entity';
 import { ProductIdDTO } from './dto/id-product.dto';
 import { multerConfig } from 'src/utils/multer.config';
+import { editPathImages } from 'src/utils/functions';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -53,6 +54,7 @@ export class ProductController {
     async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
         console.log(files);
+        editPathImages(files)
         return this.productService.createProduct(createProductDTO);
     }
     @Patch()

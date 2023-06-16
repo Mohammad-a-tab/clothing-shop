@@ -1,18 +1,9 @@
-interface imageOInfo {
-    fieldname: string,
-    originalname: string,
-    encoding: string,
-    mimetype: string,
-    destination: string,
-    filename: string,
-    path: string,
-    size: number
-}
-export function editPathImages (images: Array<imageOInfo>) {
-    // return new Promise((resolve, reject))
+import { ImageInfo } from "src/products/interfaces/image-info.interface";
+
+export function editPathImages (images: Array<ImageInfo>) {
     let path = [];
     for (const image of images) {
-        
-        path.push(image.path);
+        const editPath = image.path.replace(/\\/g, '/');
+        path.push(editPath);
     }
 }
