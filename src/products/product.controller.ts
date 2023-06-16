@@ -44,7 +44,10 @@ export class ProductController {
                 size : { type: 'string' },
                 price : { type: 'string', example: '25000' },
                 category : { type: 'string', example: "62822e4ff68cdded54aa928d" },
-                colors : { type: 'array', items: { type: "string", enum: ['black', 'white', 'red', 'blue'] } },
+                colors : { 
+                    type: 'array', items: { type: "string", 
+                    enum: ['black', 'white', 'red', 'blue']} 
+                },
                 images : { 
                     type: 'array', items: { type: "string", format: "binary" }, 
                     description: 'لطفا از ارسال تصاویر با نام فارسی خود داری بفرمایید' 
@@ -56,12 +59,36 @@ export class ProductController {
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
-        const images = editPathImages(files);
-        createProductDTO.images = images;
+        editPathImages(files, createProductDTO);
         return this.productService.createProduct(createProductDTO);
     }
-    @Patch()
-    updateProduct() {}
+    @Patch('update')
+    @ApiConsumes("multipart/form-data")
+    @ApiBody({
+        description: 'Create Product',
+        schema: {
+            type: 'object',
+            properties: {
+                title : { type: 'string' },
+                description : { type: 'string' },
+                size : { type: 'string' },
+                price : { type: 'string', example: '25000' },
+                category : { type: 'string', example: "62822e4ff68cdded54aa928d" },
+                colors : { 
+                    type: 'array', items: { type: "string", 
+                    enum: ['black', 'white', 'red', 'blue']} 
+                },
+                images : { 
+                    type: 'array', items: { type: "string", format: "binary" }, 
+                    description: 'لطفا از ارسال تصاویر با نام فارسی خود داری بفرمایید' 
+                },
+            },
+        },
+    })
+    @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
+    updateProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req) {
+
+    }
     @Delete(':id')
     @ApiParam({
         name: 'id',
