@@ -53,8 +53,8 @@ export class ProductController {
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
-        console.log(files);
-        editPathImages(files)
+        const images = editPathImages(files);
+        createProductDTO.images = images;
         return this.productService.createProduct(createProductDTO);
     }
     @Patch()
