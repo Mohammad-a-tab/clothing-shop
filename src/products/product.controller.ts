@@ -87,10 +87,11 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    updateProduct(@Body() updateProductDTO: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
-        req.body.colors = req.body?.colors.split(',').map(item => item.trim());
+    updateProduct(@Param() productIdDTO: ProductIdDTO, @Body() updateProductDTO: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
+        const { id } = productIdDTO;
         editPathImages(files, updateProductDTO);
-        return this.productService.createProduct(updateProductDTO);
+        req.body.colors = req.body?.colors.split(',').map(item => item.trim());
+        return this.productService.updateProduct(updateProductDTO, id);
     }
     @Delete(':id')
     @ApiParam({
@@ -98,8 +99,8 @@ export class ProductController {
         type: 'string',
         description: 'Id of the Product',
     })
-    deleteProduct(@Param() productIdDTo: ProductIdDTO): Promise<Product> {
-        const { id } = productIdDTo;
+    deleteProduct(@Param() productIdDTO: ProductIdDTO): Promise<Product> {
+        const { id } = productIdDTO;
         return this.productService.deleteProductById(id);
     }
 }
