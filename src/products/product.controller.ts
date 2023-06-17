@@ -7,6 +7,7 @@ import { Product } from './product.entity';
 import { ProductIdDTO } from './dto/id-product.dto';
 import { multerConfig } from 'src/utils/multer.config';
 import { editPathImages } from 'src/utils/functions';
+import { UpdateProductDTO } from './dto/update-product.dto';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -86,8 +87,10 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    updateProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req) {
-
+    updateProduct(@Body() updateProductDTO: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
+        req.body.colors = req.body.colors.split(',').map(item => item.trim());
+        editPathImages(files, updateProductDTO);
+        return this.productService.createProduct(updateProductDTO);
     }
     @Delete(':id')
     @ApiParam({
