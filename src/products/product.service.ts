@@ -24,9 +24,10 @@ export class ProductService {
         const product = this.productRepository.createProduct(createProductDTO);
         return product;
     }
-    async updateProduct(updateProductDTO: UpdateProductDTO): Promise<Product> {
-        const product = this.productRepository.createProduct(updateProductDTO);
-        return product;
+    async updateProduct(updateProductDTO: UpdateProductDTO, id: string): Promise<Product> {
+        const product = await this.getProduct(id);
+        const result = this.productRepository.updateProduct(updateProductDTO, product);
+        return result;
     }
     async deleteProductById(id: string): Promise<Product> {
         const product = await this.getProduct(id);
