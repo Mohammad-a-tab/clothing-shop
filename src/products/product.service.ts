@@ -4,6 +4,7 @@ import { ProductRepository } from './product.repository';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { Product } from './product.entity';
 import { ObjectId } from 'mongodb';
+import { UpdateProductDTO } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -21,6 +22,10 @@ export class ProductService {
     }
     async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
         const product = this.productRepository.createProduct(createProductDTO);
+        return product;
+    }
+    async updateProduct(updateProductDTO: UpdateProductDTO): Promise<Product> {
+        const product = this.productRepository.createProduct(updateProductDTO);
         return product;
     }
     async deleteProductById(id: string): Promise<Product> {

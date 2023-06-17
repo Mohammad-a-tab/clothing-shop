@@ -88,7 +88,7 @@ export class ProductController {
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     updateProduct(@Body() updateProductDTO: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
-        req.body.colors = req.body.colors.split(',').map(item => item.trim());
+        req.body.colors = req.body?.colors.split(',').map(item => item.trim());
         editPathImages(files, updateProductDTO);
         return this.productService.createProduct(updateProductDTO);
     }
