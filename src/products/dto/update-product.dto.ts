@@ -14,12 +14,12 @@ export class UpdateProductDTO {
     @IsString()
     price: string;
 
-    @IsArray()
-    colors: Array<string>;
+    @IsString()
+    colors: string[];
 
     @IsMongoId()
     category: ObjectId;
 
-    @IsArray()
-    images: Array<string>;
+    @IsString()
+    images: string[];
 }

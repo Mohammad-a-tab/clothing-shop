@@ -19,13 +19,13 @@ export class CreateProductDTO {
     price: string;
 
     @IsNotEmpty()
-    @IsArray()
-    colors: Array<string>;
+    @IsString()
+    colors: string[];
 
     @IsMongoId()
     category: ObjectId
 
     @IsNotEmpty()
-    @IsArray()
-    images: Array<string>;
+    @IsString()
+    images: string[];
 }
