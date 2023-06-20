@@ -20,13 +20,13 @@ export class ProductService {
         const product = await this.productRepository.findOneBy({ _id: productId });
         return product;
     }
-    async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
-        const product = this.productRepository.createProduct(createProductDTO);
+    async createProduct(createProductDto: CreateProductDTO): Promise<Product> {
+        const product = this.productRepository.createProduct(createProductDto);
         return product;
     }
-    async updateProduct(updateProductDTO: UpdateProductDTO, id: string): Promise<Product> {
+    async updateProduct(updateProductDto: UpdateProductDTO, id: string): Promise<Product> {
         const product = await this.getProduct(id);
-        const result = this.productRepository.updateProduct(updateProductDTO, product);
+        const result = this.productRepository.updateProduct(updateProductDto, product);
         return result;
     }
     async deleteProductById(id: string): Promise<Product> {

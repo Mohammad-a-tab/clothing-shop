@@ -10,14 +10,14 @@ export class ProductRepository extends Repository<Product> {
         super(Product, dataSource.createEntityManager());
     }
 
-    async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
-        const { title, description, size, price, category, colors, images } = createProductDTO;
+    async createProduct(createProductDto: CreateProductDTO): Promise<Product> {
+        const { title, description, size, price, category, colors, images } = createProductDto;
         const product = this.create({ title, description, size, price, category, colors, images });
         await this.save(product);
         return product;
     }
-    async updateProduct(updateProductDTO: UpdateProductDTO, product: Product): Promise<Product> {
-        const { title, description, size, price, category, colors, images } = updateProductDTO;
+    async updateProduct(updateProductDto: UpdateProductDTO, product: Product): Promise<Product> {
+        const { title, description, size, price, category, colors, images } = updateProductDto;
         await this.update({ title: product.title }, { title, description, size, price, category, colors, images });
         return this.findOneBy({_id: product._id});
     }

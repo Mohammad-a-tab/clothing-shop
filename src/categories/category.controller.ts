@@ -42,8 +42,8 @@ export class CategoryController {
             required: ['title'],
         },
     })
-    createCategory(@Body() createCategoryDTO : CreateCategoryDTO): Promise<Category> {
-        return this.categoryService.createCategory(createCategoryDTO);
+    createCategory(@Body() createCategoryDto: CreateCategoryDTO): Promise<Category> {
+        return this.categoryService.createCategory(createCategoryDto);
     }
     @Patch('update')
     @ApiConsumes('application/x-www-form-urlencoded')
@@ -58,8 +58,8 @@ export class CategoryController {
             },
         },
     })
-    updateCategory(@Body() updateCategoryDTO : UpdateCategoryDTO): Promise<Category> {
-        return this.categoryService.updateCategory(updateCategoryDTO);
+    updateCategory(@Body() updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
+        return this.categoryService.updateCategory(updateCategoryDto);
     }
     @Delete('remove/:id')
     @ApiParam({

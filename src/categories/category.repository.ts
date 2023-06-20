@@ -10,14 +10,14 @@ export class CategoryRepository extends Repository<Category> {
         super(Category, dataSource.createEntityManager());
     }
 
-    async createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
-        const { title, parent } = createCategoryDTO;
+    async createCategory(createCategoryDto: CreateCategoryDTO): Promise<Category> {
+        const { title, parent } = createCategoryDto;
         const category = this.create({ title, parent });
         await this.save(category);
         return category;
     }
-    async updateCategory(updateCategoryDTO: UpdateCategoryDTO, category: Category): Promise<Category> {
-        const { title, parent } = updateCategoryDTO;
+    async updateCategory(updateCategoryDto: UpdateCategoryDTO, category: Category): Promise<Category> {
+        const { title, parent } = updateCategoryDto;
         await this.update({title: category.title}, { title, parent });
         return this.findOneBy({_id: category._id});
     }

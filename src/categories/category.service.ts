@@ -22,14 +22,14 @@ export class CategoryService {
         const category = await this.categoryRepository.findOneBy({ _id: categoryId });
         return category
     }
-    createCategory(createCategoryDTO: CreateCategoryDTO): Promise<Category> {
-        const category = this.categoryRepository.createCategory(createCategoryDTO);
+    createCategory(createCategoryDto: CreateCategoryDTO): Promise<Category> {
+        const category = this.categoryRepository.createCategory(createCategoryDto);
         return category;
     }
-    async updateCategory(updateCategoryDTO: UpdateCategoryDTO): Promise<Category> {
-        const { id } = updateCategoryDTO;
+    async updateCategory(updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
+        const { id } = updateCategoryDto;
         const category = await this.getCategory(id);
-        const result = this.categoryRepository.updateCategory(updateCategoryDTO, category);
+        const result = this.categoryRepository.updateCategory(updateCategoryDto, category);
         return result;
     }
     async deleteCategoryById(id: string): Promise<Category> {
