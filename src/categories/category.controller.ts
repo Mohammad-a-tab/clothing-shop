@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Patch, Get, Delete, Param } from '@nestjs/common';
+import { Controller, Body, Post, Patch, Get, Delete, Param, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags, ApiParam } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
 import { CreateCategoryDTO } from './dto/create-category.dto';
@@ -42,7 +42,7 @@ export class CategoryController {
             required: ['title'],
         },
     })
-    createCategory(@Body() createCategoryDto: CreateCategoryDTO): Promise<Category> {
+    createCategory(@Body(new ValidationPipe()) createCategoryDto: CreateCategoryDTO): Promise<Category> {
         return this.categoryService.createCategory(createCategoryDto);
     }
     @Patch('update')
@@ -58,7 +58,7 @@ export class CategoryController {
             },
         },
     })
-    updateCategory(@Body() updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
+    updateCategory(@Body(new ValidationPipe()) updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
         return this.categoryService.updateCategory(updateCategoryDto);
     }
     @Delete('remove/:id')

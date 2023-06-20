@@ -77,7 +77,7 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    async createProduct(@Body() createProductDto: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
+    async createProduct(@Body(new ValidationPipe()) createProductDto: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
         editPathImages(files, createProductDto);
         return this.productService.createProduct(createProductDto);
