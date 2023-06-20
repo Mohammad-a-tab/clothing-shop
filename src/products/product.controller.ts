@@ -1,5 +1,24 @@
-import { Controller, Post, Patch, Get, Delete, Body, Param, UseInterceptors, UploadedFiles, Req } from '@nestjs/common';
-import { ApiConsumes, ApiBody, ApiTags, ApiBearerAuth, ApiSecurity, ApiParam } from '@nestjs/swagger';
+import { 
+    Controller, 
+    Post, 
+    Patch, 
+    Get, 
+    Delete, 
+    Body, 
+    Param, 
+    UseInterceptors, 
+    UploadedFiles, 
+    Req, 
+    ValidationPipe 
+} from '@nestjs/common';
+import { 
+    ApiConsumes, 
+    ApiBody, 
+    ApiTags, 
+    ApiBearerAuth, 
+    ApiSecurity, 
+    ApiParam 
+} from '@nestjs/swagger';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
@@ -96,7 +115,7 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    updateProduct(@Param() productIdDto: ProductIdDTO, @Body() updateProductDto: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
+    updateProduct(@Param() productIdDto: ProductIdDTO, @Body(new ValidationPipe()) updateProductDto: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
         const { id } = productIdDto;
         editPathImages(files, updateProductDto);
         req.body.colors = req.body?.colors.split(',').map(item => item.trim());
