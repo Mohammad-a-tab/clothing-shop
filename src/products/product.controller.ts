@@ -63,8 +63,13 @@ export class ProductController {
         editPathImages(files, createProductDTO);
         return this.productService.createProduct(createProductDTO);
     }
-    @Patch('update')
+    @Patch('update/:id')
     @ApiConsumes("multipart/form-data")
+    @ApiParam({
+        name: 'id',
+        type: 'string',
+        description: 'Id of the Product',
+    })
     @ApiBody({
         description: 'Create Product',
         schema: {
