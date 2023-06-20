@@ -18,7 +18,7 @@ export class UpdateProductDTO {
     colors: Array<string>;
 
     @IsMongoId()
-    category: ObjectId
+    category: ObjectId;
 
     @IsArray()
     images: Array<string>;

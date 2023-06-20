@@ -29,8 +29,8 @@ export class ProductController {
         type: 'string',
         description: 'Id of the Product',
     })
-    getProduct(@Param() productIdDTo: ProductIdDTO): Promise<Product> {
-        const { id } = productIdDTo;
+    getProduct(@Param() productIdDto: ProductIdDTO): Promise<Product> {
+        const { id } = productIdDto;
         return this.productService.getProduct(id);
     }
     @Post('add')
@@ -58,10 +58,10 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    async createProduct(@Body() createProductDTO: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
+    async createProduct(@Body() createProductDto: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
-        editPathImages(files, createProductDTO);
-        return this.productService.createProduct(createProductDTO);
+        editPathImages(files, createProductDto);
+        return this.productService.createProduct(createProductDto);
     }
     @Patch('update/:id')
     @ApiConsumes("multipart/form-data")
@@ -79,7 +79,11 @@ export class ProductController {
                 description : { type: 'string' },
                 size : { type: 'string' },
                 price : { type: 'string', example: '25000' },
-                category : { type: 'string', example: "62822e4ff68cdded54aa928d" },
+                category : { 
+                    type: 'string', 
+                    example: '609be865b58f3829f8f9a6cb', // Example ObjectId value
+                    format: 'objectId',  
+                },
                 colors : { 
                     type: 'array', items: { type: "string", 
                     enum: ['black', 'white', 'red', 'blue']} 
@@ -92,11 +96,11 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    updateProduct(@Param() productIdDTO: ProductIdDTO, @Body() updateProductDTO: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
+    updateProduct(@Param() productIdDTO: ProductIdDTO, @Body() updateProductDto: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
         const { id } = productIdDTO;
-        editPathImages(files, updateProductDTO);
+        editPathImages(files, updateProductDto);
         req.body.colors = req.body?.colors.split(',').map(item => item.trim());
-        return this.productService.updateProduct(updateProductDTO, id);
+        return this.productService.updateProduct(updateProductDto, id);
     }
     @Delete(':id')
     @ApiParam({
@@ -104,8 +108,8 @@ export class ProductController {
         type: 'string',
         description: 'Id of the Product',
     })
-    deleteProduct(@Param() productIdDTO: ProductIdDTO): Promise<Product> {
-        const { id } = productIdDTO;
+    deleteProduct(@Param() productIdDto: ProductIdDTO): Promise<Product> {
+        const { id } = productIdDto;
         return this.productService.deleteProductById(id);
     }
 }
