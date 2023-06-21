@@ -1,4 +1,4 @@
-import { IsMongoId, IsNotEmpty, IsString } from "class-validator";
+import { IsMongoId, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
 export class UpdateCategoryDTO {
@@ -9,6 +9,7 @@ export class UpdateCategoryDTO {
     @IsString()
     title: string;
 
+    @IsOptional()
     @IsMongoId()
-    parent: ObjectId;
+    parent?: ObjectId;
 }

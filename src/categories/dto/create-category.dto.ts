@@ -7,5 +7,4 @@ export class CreateCategoryDTO {
 
     @IsMongoId()
     parent: ObjectId
-
 } 
