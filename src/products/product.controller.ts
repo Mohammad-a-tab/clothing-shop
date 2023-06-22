@@ -77,7 +77,11 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    async createProduct(@Body(new ValidationPipe()) createProductDto: CreateProductDTO, @UploadedFiles() files, @Req() req): Promise<Product> {
+    async createProduct(
+        @Body(new ValidationPipe()) createProductDto: CreateProductDTO, 
+        @UploadedFiles() files, 
+        @Req() req
+    ): Promise<Product> {
         req.body.colors = req.body.colors.split(',').map(item => item.trim());
         editPathImages(files, createProductDto);
         return this.productService.createProduct(createProductDto);
@@ -115,7 +119,12 @@ export class ProductController {
         },
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
-    updateProduct(@Param() productIdDto: ProductIdDTO, @Body(new ValidationPipe()) updateProductDto: UpdateProductDTO, @UploadedFiles() files, @Req() req) {
+    async updateProduct(
+        @Param() productIdDto: ProductIdDTO, 
+        @Body(new ValidationPipe()) updateProductDto: UpdateProductDTO, 
+        @UploadedFiles() files, 
+        @Req() req
+    ): Promise<Product> {
         const { id } = productIdDto;
         editPathImages(files, updateProductDto);
         req.body.colors = req.body?.colors.split(',').map(item => item.trim());

@@ -1,4 +1,4 @@
-import { IsArray, IsMongoId, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsArray, IsMongoId, IsOptional, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
 export class UpdateProductDTO {
@@ -20,7 +20,4 @@ export class UpdateProductDTO {
     @IsOptional()
     @IsMongoId()
     category?: ObjectId;
-
-    @IsString()
-    images: string[];
 }

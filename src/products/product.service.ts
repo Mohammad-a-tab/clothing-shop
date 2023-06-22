@@ -5,6 +5,7 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { Product } from './product.entity';
 import { ObjectId } from 'mongodb';
 import { UpdateProductDTO } from './dto/update-product.dto';
+import { removeFieldEmpty } from 'src/utils/functions';
 
 @Injectable()
 export class ProductService {
@@ -26,6 +27,8 @@ export class ProductService {
     }
     async updateProduct(updateProductDto: UpdateProductDTO, id: string): Promise<Product> {
         const product = await this.getProduct(id);
+        removeFieldEmpty(updateProductDto)
+        console.log(updateProductDto);
         const result = this.productRepository.updateProduct(updateProductDto, product);
         return result;
     }

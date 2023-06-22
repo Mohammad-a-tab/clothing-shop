@@ -11,14 +11,13 @@ export class ProductRepository extends Repository<Product> {
     }
 
     async createProduct(createProductDto: CreateProductDTO): Promise<Product> {
-        const { title, description, size, price, category, colors, images } = createProductDto;
-        const product = this.create({ title, description, size, price, category, colors, images });
+        
+        const product = this.create({ ...createProductDto });
         await this.save(product);
         return product;
     }
     async updateProduct(updateProductDto: UpdateProductDTO, product: Product): Promise<Product> {
-        const { title, description, size, price, category, colors, images } = updateProductDto;
-        await this.update({ title: product.title }, { title, description, size, price, category, colors, images });
+        await this.update({ title: product.title }, { ... updateProductDto });
         return this.findOneBy({_id: product._id});
     }
 }

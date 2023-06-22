@@ -23,9 +23,5 @@ export class CreateProductDTO {
     colors: string[];
 
     @IsMongoId()
-    category: ObjectId
-
-    @IsNotEmpty()
-    @IsString()
-    images: string[];
+    category: ObjectId;
 }
