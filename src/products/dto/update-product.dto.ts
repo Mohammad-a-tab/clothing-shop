@@ -17,7 +17,8 @@ export class UpdateProductDTO {
     @IsString()
     colors: string[];
 
-    @IsOptional()
     @IsMongoId()
-    category?: ObjectId;
+    @IsOptional()
+    @IsString()
+    category?: ObjectId | null | '';
 }
