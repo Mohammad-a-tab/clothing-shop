@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipeOptions } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './products/product.module';
@@ -6,6 +6,17 @@ import { CategoryModule } from './categories/category.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+const validationPipeOptions: ValidationPipeOptions = {
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transformOptions: {
+      enableImplicitConversion: true,
+    },
+    validationError: {
+      value: false,
+    },
+    transform: true,
+};
 @Module({
   imports: [
     TypeOrmModule.forRoot({

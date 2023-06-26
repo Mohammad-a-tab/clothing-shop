@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsArray, IsMongoId, IsOptional, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
@@ -17,8 +18,9 @@ export class UpdateProductDTO {
     @IsString()
     colors: string[];
 
-    @IsMongoId()
     @IsOptional()
+    @Transform(({ value }) => value === '' ? null : value)
+    @IsMongoId({ message: 'Category must be a MongoDB id or empty' })
     @IsString()
-    category?: ObjectId | null | '';
+    category?: ObjectId;
 }
