@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsArray, IsMongoId, IsOptional, IsString } from "class-validator";
+import { IsMongoId, IsOptional, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
 export class UpdateProductDTO {

@@ -1,4 +1,4 @@
-import { IsArray, IsMongoId, IsNotEmpty, IsString } from "class-validator";
+import { IsMongoId, IsNotEmpty, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
 export class CreateProductDTO {
