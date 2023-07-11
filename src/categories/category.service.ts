@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryRepository } from './category.repository';
-import { CreateCategoryDTO } from './dto/create-category.dto';
+import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './category.entity';
 import { ObjectId } from 'mongodb';
-import { UpdateCategoryDTO } from './dto/update-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -22,11 +22,11 @@ export class CategoryService {
         const category = await this.categoryRepository.findOneBy({ _id: categoryId });
         return category
     }
-    createCategory(createCategoryDto: CreateCategoryDTO): Promise<Category> {
+    createCategory(createCategoryDto: CreateCategoryDto): Promise<Category> {
         const category = this.categoryRepository.createCategory(createCategoryDto);
         return category;
     }
-    async updateCategory(updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
+    async updateCategory(updateCategoryDto: UpdateCategoryDto): Promise<Category> {
         const { id } = updateCategoryDto;
         const category = await this.getCategory(id);
         const result = this.categoryRepository.updateCategory(updateCategoryDto, category);

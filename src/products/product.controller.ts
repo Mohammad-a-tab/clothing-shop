@@ -20,10 +20,10 @@ import {
     ApiParam 
 } from '@nestjs/swagger';
 import { ProductService } from './product.service';
-import { CreateProductDTO } from './dto/create-product.dto';
+import { CreateProductDto } from './dto/create-product.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Product } from './product.entity';
-import { ProductIdDTO } from './dto/id-product.dto';
+import { ProductIdDto } from './dto/id-product.dto';
 import { multerConfig } from 'src/utils/multer.config';
 import { editPathImages } from 'src/utils/functions';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -48,7 +48,7 @@ export class ProductController {
         type: 'string',
         description: 'Id of the Product',
     })
-    getProduct(@Param() productIdDto: ProductIdDTO): Promise<Product> {
+    getProduct(@Param() productIdDto: ProductIdDto): Promise<Product> {
         const { id } = productIdDto;
         return this.productService.getProduct(id);
     }
@@ -78,7 +78,7 @@ export class ProductController {
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     async createProduct(
-        @Body(new ValidationPipe()) createProductDto: CreateProductDTO, 
+        @Body(new ValidationPipe()) createProductDto: CreateProductDto, 
         @UploadedFiles() files, 
         @Req() req
     ): Promise<Product> {
@@ -120,7 +120,7 @@ export class ProductController {
     })
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     async updateProduct(
-        @Param() productIdDto: ProductIdDTO, 
+        @Param() productIdDto: ProductIdDto, 
         @Body(new ValidationPipe()) updateProductDto: UpdateProductDto, 
         @UploadedFiles() files, 
         @Req() req
@@ -136,7 +136,7 @@ export class ProductController {
         type: 'string',
         description: 'Id of the Product',
     })
-    deleteProduct(@Param() productIdDto: ProductIdDTO): Promise<Product> {
+    deleteProduct(@Param() productIdDto: ProductIdDto): Promise<Product> {
         const { id } = productIdDto;
         return this.productService.deleteProductById(id);
     }

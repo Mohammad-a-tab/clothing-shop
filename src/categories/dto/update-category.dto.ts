@@ -1,7 +1,7 @@
 import { IsMongoId, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
-export class UpdateCategoryDTO {
+export class UpdateCategoryDto {
     @IsMongoId()
     @IsNotEmpty()
     id: string;

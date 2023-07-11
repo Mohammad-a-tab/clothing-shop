@@ -1,7 +1,7 @@
 import { IsMongoId, IsNotEmpty, IsString } from "class-validator";
 import { ObjectId } from "mongodb";
 
-export class CreateProductDTO {
+export class CreateProductDto {
     @IsNotEmpty()
     @IsString()
     title: string;

@@ -1,10 +1,10 @@
 import { Controller, Body, Post, Patch, Get, Delete, Param, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiSecurity, ApiTags, ApiParam } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
-import { CreateCategoryDTO } from './dto/create-category.dto';
+import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './category.entity';
-import { CategoryIdDTO } from './dto/id-category.dto';
-import { UpdateCategoryDTO } from './dto/update-category.dto';
+import { CategoryIdDto } from './dto/id-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 @ApiTags('categories')
 @ApiBearerAuth()
 // @UseGuards(AuthGuard())
@@ -25,7 +25,7 @@ export class CategoryController {
         type: 'string',
         description: 'Id of the category',
     })
-    getCategory(@Param(new ValidationPipe()) categoryIdDto: CategoryIdDTO): Promise<Category> {
+    getCategory(@Param(new ValidationPipe()) categoryIdDto: CategoryIdDto): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.getCategory(id);
     }
@@ -42,7 +42,7 @@ export class CategoryController {
             required: ['title'],
         },
     })
-    createCategory(@Body(new ValidationPipe()) createCategoryDto: CreateCategoryDTO): Promise<Category> {
+    createCategory(@Body(new ValidationPipe()) createCategoryDto: CreateCategoryDto): Promise<Category> {
         return this.categoryService.createCategory(createCategoryDto);
     }
     @Patch('update')
@@ -58,7 +58,7 @@ export class CategoryController {
             },
         },
     })
-    updateCategory(@Body(new ValidationPipe()) updateCategoryDto: UpdateCategoryDTO): Promise<Category> {
+    updateCategory(@Body(new ValidationPipe()) updateCategoryDto: UpdateCategoryDto): Promise<Category> {
         return this.categoryService.updateCategory(updateCategoryDto);
     }
     @Delete('remove/:id')
@@ -67,7 +67,7 @@ export class CategoryController {
         type: 'string',
         description: 'Id of the category',
     })
-    removeCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
+    removeCategory(@Param() categoryIdDto: CategoryIdDto): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.deleteCategoryById(id);
     }
