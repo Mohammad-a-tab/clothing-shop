@@ -94,7 +94,7 @@ export class ProductController {
         description: 'Id of the Product',
     })
     @ApiBody({
-        description: 'Create Product',
+        description: 'Update Product',
         schema: {
             type: 'object',
             properties: {

@@ -25,7 +25,7 @@ export class CategoryController {
         type: 'string',
         description: 'Id of the category',
     })
-    getCategory(@Param() categoryIdDto: CategoryIdDTO): Promise<Category> {
+    getCategory(@Param(new ValidationPipe()) categoryIdDto: CategoryIdDTO): Promise<Category> {
         const { id } = categoryIdDto;
         return this.categoryService.getCategory(id);
     }
