@@ -26,7 +26,7 @@ import { Product } from './product.entity';
 import { ProductIdDTO } from './dto/id-product.dto';
 import { multerConfig } from 'src/utils/multer.config';
 import { editPathImages } from 'src/utils/functions';
-import { UpdateProductDTO } from './dto/update-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -121,7 +121,7 @@ export class ProductController {
     @UseInterceptors(FilesInterceptor('images', 10, multerConfig))
     async updateProduct(
         @Param() productIdDto: ProductIdDTO, 
-        @Body(new ValidationPipe()) updateProductDto: UpdateProductDTO, 
+        @Body(new ValidationPipe()) updateProductDto: UpdateProductDto, 
         @UploadedFiles() files, 
         @Req() req
     ): Promise<Product> {
