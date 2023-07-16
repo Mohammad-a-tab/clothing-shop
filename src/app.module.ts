@@ -6,17 +6,6 @@ import { CategoryModule } from './categories/category.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-const validationPipeOptions: ValidationPipeOptions = {
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-    },
-    validationError: {
-      value: false,
-    },
-    transform: true,
-};
 @Module({
   imports: [
     TypeOrmModule.forRoot({
